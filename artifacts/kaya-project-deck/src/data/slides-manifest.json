@@ -1,0 +1,8 @@
+[
+  {"id":"a3648ecd-0d11-4bcc-8ea7-19fbbec60b01","position":1,"filepath":"src/pages/slides/Cover.tsx","title":"Kaya Foods","description":"Website prototype · Client review","speakerNotes":""},
+  {"id":"a3648ecd-0d11-4bcc-8ea7-19fbbec60b02","position":2,"filepath":"src/pages/slides/Brand.tsx","title":"A local food brand, thoughtfully presented","description":"Brand direction and initial food categories","speakerNotes":""},
+  {"id":"a3648ecd-0d11-4bcc-8ea7-19fbbec60b03","position":3,"filepath":"src/pages/slides/Website.tsx","title":"A simple website for everyday ordering","description":"Catalogue, basket and mobile-first experience","speakerNotes":""},
+  {"id":"a3648ecd-0d11-4bcc-8ea7-19fbbec60b04","position":4,"filepath":"src/pages/slides/Ordering.tsx","title":"From basket to a WhatsApp request","description":"Customer order request and manual confirmation","speakerNotes":""},
+  {"id":"a3648ecd-0d11-4bcc-8ea7-19fbbec60b05","position":5,"filepath":"src/pages/slides/Status.tsx","title":"Ready for review—not yet launched","description":"Current prototype status and limitations","speakerNotes":""},
+  {"id":"a3648ecd-0d11-4bcc-8ea7-19fbbec60b06","position":6,"filepath":"src/pages/slides/Launch.tsx","title":"What we need to launch","description":"Content, business details and publishing checklist","speakerNotes":""}
+]

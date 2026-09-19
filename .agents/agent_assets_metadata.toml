@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "3d5rG2HL0C_NBvPuigsEw"
+uri = "file://.local/outputs/Kaya-Foods---Project-Review.pdf"
+type = "pdf"
+title = "Kaya Foods — Project Review.pdf"

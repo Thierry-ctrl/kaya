@@ -1,0 +1,28 @@
+kind = "slides"
+previewPath = "/kaya-project-deck/"
+title = "Kaya Foods — Project Review"
+description = "Six-slide client review of the Kaya Foods website prototype, its brand direction, ordering flow, current status and launch requirements."
+version = "1.0.0"
+id = "artifacts/kaya-project-deck"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/kaya-project-deck/" ]
+localPort = 24823
+
+[services.development]
+run = "pnpm --filter @workspace/kaya-project-deck run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/kaya-project-deck", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/kaya-project-deck/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24823"
+BASE_PATH = "/kaya-project-deck/"
