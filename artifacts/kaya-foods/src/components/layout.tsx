@@ -151,9 +151,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 )}
                 {settings.socialLinks.facebook ? (
                   <a href={settings.socialLinks.facebook} className="hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm font-bold">Facebook</a>
-                ) : (
-                  <span className="opacity-50">Facebook {en.footer.pending}</span>
-                )}
+                ) : null}
               </li>
             </ul>
           </div>
