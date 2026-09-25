@@ -19,14 +19,14 @@ export default function Home() {
           <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[60%] bg-foreground/40 blur-[100px] rounded-full"></div>
         </div>
         
-        <div className="container relative z-10 mx-auto grid max-w-6xl items-center gap-14 px-4 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
+        <div className="container relative z-10 mx-auto grid max-w-6xl items-center gap-14 px-4 lg:grid-cols-[1.2fr_0.8fr] lg:gap-12">
           <div className="text-center lg:text-left">
             <Badge className="mb-8 border border-accent/40 bg-foreground/20 px-6 py-2 text-sm font-bold uppercase tracking-[0.2em] text-accent shadow-lg backdrop-blur-md">
               {settings.heroBadge}
             </Badge>
-            <h1 className="mb-8 text-5xl font-black leading-[1.02] tracking-tight text-primary-foreground md:text-7xl lg:text-7xl">
+            <h1 className="mb-8 text-[clamp(2.25rem,5vw,4rem)] font-black leading-[1.02] tracking-tight text-primary-foreground">
               {taglineLines.map((line, index) => (
-                <span key={line} className={`block ${index === 1 ? "text-accent" : ""}`}>{line}</span>
+                <span key={line} className={`block whitespace-nowrap ${index === 1 ? "text-accent" : ""}`}>{line}</span>
               ))}
             </h1>
             <p className="mx-auto mb-12 max-w-2xl text-lg font-medium leading-relaxed text-primary-foreground/90 md:text-xl lg:mx-0">
