@@ -7,12 +7,14 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { en } from "@/content/en";
 import { resolveStorefrontImage, useStorefront } from "@/hooks/use-storefront";
+import { splitTagline } from "@/lib/tagline";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { settings } = useStorefront();
   const { totalItemsCount } = useBasket();
   const [isBasketOpen, setIsBasketOpen] = useState(false);
+  const taglineLines = splitTagline(settings.description);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -132,8 +134,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 />
               ) : <span className="text-2xl font-black">{settings.name}</span>}
             </Link>
-            <p className="text-background/80 max-w-md text-lg leading-relaxed font-medium">
-              {settings.description}
+            <p className="max-w-md leading-tight">
+              {taglineLines.map((line, index) => (
+                <span key={line} className={`block ${index === 0 ? "text-base font-medium text-background/70" : "mt-1 text-xl font-black text-background"}`}>{line}</span>
+              ))}
             </p>
           </div>
           

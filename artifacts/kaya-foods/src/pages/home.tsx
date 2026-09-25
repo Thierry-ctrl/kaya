@@ -4,41 +4,63 @@ import { Catalogue } from "@/components/catalogue";
 import { ArrowRight } from "lucide-react";
 import { en } from "@/content/en";
 import { resolveStorefrontImage, useStorefront } from "@/hooks/use-storefront";
+import { splitTagline } from "@/lib/tagline";
 
 export default function Home() {
   const { settings } = useStorefront();
+  const taglineLines = splitTagline(settings.description);
   return (
     <div className="flex flex-col w-full">
       {/* Hero Section */}
-      <section className="relative pt-24 pb-28 md:pt-36 md:pb-36 bg-primary overflow-hidden">
+      <section className="relative overflow-hidden bg-primary py-20 md:py-28 lg:py-24">
         {/* Soft atmospheric glows using brand colors */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-accent/20 blur-[120px] rounded-full"></div>
           <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[60%] bg-foreground/40 blur-[100px] rounded-full"></div>
         </div>
         
-        <div className="container mx-auto px-4 text-center max-w-4xl relative z-10">
-          <Badge className="mb-8 border border-accent/40 text-accent uppercase tracking-[0.2em] px-6 py-2 bg-foreground/20 backdrop-blur-md text-sm font-bold shadow-lg">
-            {settings.heroBadge}
-          </Badge>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-primary-foreground mb-8 tracking-tight leading-[1.05]">
-            {settings.description}
-          </h1>
-          <p className="text-lg md:text-2xl text-primary-foreground/90 max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
-             {settings.heroText}
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Button 
-              size="lg" 
-              className="w-full sm:w-auto h-16 px-10 text-lg rounded-full bg-accent text-accent-foreground hover:bg-accent/90 hover:scale-105 transition-all shadow-xl font-bold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-offset-2 focus-visible:ring-offset-primary focus-visible:ring-accent" 
-              onClick={() => {
-                document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              {en.hero.exploreBtn}
-              <ArrowRight className="ml-3 h-6 w-6" />
-            </Button>
+        <div className="container relative z-10 mx-auto grid max-w-6xl items-center gap-14 px-4 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
+          <div className="text-center lg:text-left">
+            <Badge className="mb-8 border border-accent/40 bg-foreground/20 px-6 py-2 text-sm font-bold uppercase tracking-[0.2em] text-accent shadow-lg backdrop-blur-md">
+              {settings.heroBadge}
+            </Badge>
+            <h1 className="mb-8 text-5xl font-black leading-[1.02] tracking-tight text-primary-foreground md:text-7xl lg:text-7xl">
+              {taglineLines.map((line, index) => (
+                <span key={line} className={`block ${index === 1 ? "text-accent" : ""}`}>{line}</span>
+              ))}
+            </h1>
+            <p className="mx-auto mb-12 max-w-2xl text-lg font-medium leading-relaxed text-primary-foreground/90 md:text-xl lg:mx-0">
+              {settings.heroText}
+            </p>
+            <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-center lg:justify-start">
+              <Button
+                size="lg"
+                className="h-16 w-full rounded-full bg-accent px-10 text-lg font-bold text-accent-foreground shadow-xl transition-all hover:scale-105 hover:bg-accent/90 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary sm:w-auto"
+                onClick={() => {
+                  document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                {en.hero.exploreBtn}
+                <ArrowRight className="ml-3 h-6 w-6" />
+              </Button>
+            </div>
           </div>
+
+          <figure className="relative mx-auto w-full max-w-lg lg:max-w-none">
+            <div className="absolute -inset-3 rotate-2 rounded-[2.5rem] border-2 border-accent/50"></div>
+            <div className="absolute -bottom-5 -right-5 h-28 w-28 rounded-full bg-accent/30 blur-2xl"></div>
+            <img
+              src="/images/landing/strawberry-jam-breakfast.webp"
+              alt="Strawberry jam served with fresh strawberries and wholegrain bread in a bright kitchen"
+              width={1597}
+              height={2400}
+              fetchPriority="high"
+              className="relative aspect-[4/5] w-full rounded-[2rem] border-4 border-primary-foreground/10 object-cover object-[center_70%] shadow-2xl"
+            />
+            <figcaption className="absolute bottom-4 left-4 rounded-full bg-foreground/75 px-4 py-2 text-xs font-bold text-background backdrop-blur-md">
+              Everyday pantry favourites
+            </figcaption>
+          </figure>
         </div>
       </section>
 

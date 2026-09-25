@@ -13,11 +13,11 @@ const ssl = process.env.DB_SSL === "true"
 const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl });
 
 const products = [
-  ["p-strawberry-jam", "Strawberry Jam", "Jam", "A chunky strawberry spread.", "/images/products/kaya-strawberry-jam.webp", "AI illustration of strawberry jam in a ceramic bowl with fresh strawberries", "available", [{ id: "s-250g", label: "250g", price: 3500 }, { id: "s-500g", label: "500g", price: 6000 }]],
+  ["p-strawberry-jam", "Strawberry Jam", "Jam", "A chunky strawberry spread.", "/images/products/kaya-strawberry-jam.webp", "AI illustration of strawberry jam in a ceramic bowl with fresh strawberries", "available", [{ id: "s-350g", label: "350g", price: 3500 }, { id: "s-600g", label: "600g", price: 6000 }]],
   ["p-passion-juice", "Passion Fruit Juice", "Juices", "Passion fruit juice.", "/images/products/kaya-passion-fruit-juice.webp", "AI illustration of golden passion fruit juice in a glass beside halved passion fruits", "coming_soon", [{ id: "s-500ml", label: "500ml", price: 2500 }, { id: "s-1l", label: "1L", price: 4500 }]],
   ["p-akabanga-chilli", "Fiery Chilli Paste", "Chilli", "A vibrant blend of Rwandan chillies.", "/images/products/kaya-chilli-paste.webp", "AI illustration of red chilli paste in a green ceramic dish with fresh chillies", "coming_soon", [{ id: "s-100g", label: "100g", price: 2000 }]],
   ["p-tomato-paste", "Rich Tomato Paste", "Tomato Paste", "Concentrated local tomatoes.", "/images/products/kaya-tomato-paste.webp", "AI illustration of tomato paste in a ceramic ramekin beside ripe tomatoes", "coming_soon", [{ id: "s-200g", label: "200g", price: 1500 }, { id: "s-400g", label: "400g", price: 2800 }]],
-  ["p-mango-jam", "Mango Preserve", "Jam", "Mangoes preserved for everyday use.", "/images/products/kaya-mango-preserve.webp", "AI illustration of mango preserve in a ceramic bowl beside sliced mango", "available", [{ id: "s-250g", label: "250g", price: 3800 }]],
+  ["p-mango-jam", "Mango Passion Jam", "Jam", "Mango and passion fruit blended into a bright tropical jam.", "/images/products/kaya-mango-preserve.webp", "AI illustration of mango passion jam in a ceramic bowl beside sliced mango", "available", [{ id: "s-350g", label: "350g", price: 3800 }, { id: "s-600g", label: "600g", price: 6500 }]],
 ] as const;
 
 await client.connect();
