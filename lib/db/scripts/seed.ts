@@ -13,11 +13,15 @@ const ssl = process.env.DB_SSL === "true"
 const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl });
 
 const products = [
-  ["p-strawberry-jam", "Strawberry Jam", "Jam", "A chunky strawberry spread.", "/images/products/kaya-strawberry-jam.webp", "AI illustration of strawberry jam in a ceramic bowl with fresh strawberries", "available", [{ id: "s-350g", label: "350g", price: 3500 }, { id: "s-600g", label: "600g", price: 6000 }]],
-  ["p-passion-juice", "Passion Fruit Juice", "Juices", "Passion fruit juice.", "/images/products/kaya-passion-fruit-juice.webp", "AI illustration of golden passion fruit juice in a glass beside halved passion fruits", "coming_soon", [{ id: "s-500ml", label: "500ml", price: 2500 }, { id: "s-1l", label: "1L", price: 4500 }]],
-  ["p-akabanga-chilli", "Fiery Chilli Paste", "Chilli", "A vibrant blend of Rwandan chillies.", "/images/products/kaya-chilli-paste.webp", "AI illustration of red chilli paste in a green ceramic dish with fresh chillies", "coming_soon", [{ id: "s-100g", label: "100g", price: 2000 }]],
-  ["p-tomato-paste", "Rich Tomato Paste", "Tomato Paste", "Concentrated local tomatoes.", "/images/products/kaya-tomato-paste.webp", "AI illustration of tomato paste in a ceramic ramekin beside ripe tomatoes", "coming_soon", [{ id: "s-200g", label: "200g", price: 1500 }, { id: "s-400g", label: "400g", price: 2800 }]],
-  ["p-mango-jam", "Mango Passion Jam", "Jam", "Mango and passion fruit blended into a bright tropical jam.", "/images/products/kaya-mango-preserve.webp", "AI illustration of mango passion jam in a ceramic bowl beside sliced mango", "available", [{ id: "s-350g", label: "350g", price: 3800 }, { id: "s-600g", label: "600g", price: 6500 }]],
+  ["p-strawberry-jam", "Strawberry Jam", "Jam", "Currently out of stock.", "/images/products/kaya-strawberry-jam.webp", "Illustration of strawberry jam in a ceramic bowl with fresh strawberries", "unavailable", [], true],
+  ["p-passion-juice", "Passion Fruit Juice", "Juices", "Passion fruit juice.", "/images/products/kaya-passion-fruit-juice.webp", "AI illustration of golden passion fruit juice in a glass beside halved passion fruits", "coming_soon", [{ id: "s-500ml", label: "500ml", price: 2500 }, { id: "s-1l", label: "1L", price: 4500 }], true],
+  ["p-akabanga-chilli", "Fiery Chilli Paste", "Chilli", "A vibrant blend of Rwandan chillies.", "/images/products/kaya-chilli-paste.webp", "AI illustration of red chilli paste in a green ceramic dish with fresh chillies", "coming_soon", [{ id: "s-100g", label: "100g", price: 2000 }], true],
+  ["p-tomato-paste", "Rich Tomato Paste", "Tomato Paste", "Concentrated local tomatoes.", "/images/products/kaya-tomato-paste.webp", "AI illustration of tomato paste in a ceramic ramekin beside ripe tomatoes", "coming_soon", [{ id: "s-200g", label: "200g", price: 1500 }, { id: "s-400g", label: "400g", price: 2800 }], true],
+  ["p-mango-jam", "Mango Passion Jam", "Jam", "A premium mango and passion fruit jam.", "/images/products/kaya-mango-passion-jam.jpg", "Jar of Kaya Mango Passion Jam", "available", [{ id: "s-premium-300g", label: "Premium 300g", price: 7500 }, { id: "s-600g", label: "600g", price: 7000 }], false],
+  ["p-tropical-jam", "Tropical Jam", "Jam", "A premium blend of tropical fruits.", "/images/products/kaya-tropical-jam.jpg", "Jar of Kaya Tropical Jam", "available", [{ id: "s-premium-300g", label: "Premium 300g", price: 7000 }, { id: "s-600g", label: "600g", price: 5000 }], false],
+  ["p-mango-jam-plain", "Mango Jam", "Jam", "Premium mango jam. The 600g format is currently out of stock.", "/images/products/kaya-mango-jam.jpg", "Jar of Kaya Mango Jam", "available", [{ id: "s-premium-300g", label: "Premium 300g", price: 7000 }], false],
+  ["p-tree-tomato-jam", "Tree Tomato Jam", "Jam", "Premium tree tomato jam. The 600g format is currently out of stock.", "/images/products/kaya-tree-tomato-jam.jpg", "Jar of Kaya Tree Tomato Jam", "available", [{ id: "s-premium-300g", label: "Premium 300g", price: 7000 }], false],
+  ["p-papaya-vanilla-jam", "Papaya Jam with Vanilla", "Jam", "Premium papaya jam with vanilla. The 600g format is currently out of stock.", "/images/products/kaya-papaya-vanilla-jam.jpg", "Jar of Kaya Papaya Jam with Vanilla", "available", [{ id: "s-premium-300g", label: "Premium 300g", price: 7000 }], false],
 ] as const;
 
 await client.connect();
@@ -26,8 +30,8 @@ try {
   for (const product of products) {
     await client.query(
       `INSERT INTO products (id, name, category, short_description, image_url, alt_text, availability, sizes, is_sample, published)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,true,true) ON CONFLICT (id) DO NOTHING`,
-      [...product.slice(0, 7), JSON.stringify(product[7])],
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,true) ON CONFLICT (id) DO NOTHING`,
+      [...product.slice(0, 7), JSON.stringify(product[7]), product[8]],
     );
   }
   await client.query(
@@ -47,7 +51,7 @@ try {
       "AI illustration of a woven basket filled with tomatoes, mangoes, passion fruit, chillies and greens",
       "AI-generated illustration · not a supplier or farm photograph",
       "/images/brand/kaya-wordmark.png",
-      "Presentation preview: products, sizes and prices are samples. AI-generated images are illustrative, not photographs of Kaya’s actual products.",
+      "The Strawberry Jam image is illustrative. Other jam photographs were supplied by Kaya Foods.",
     ],
   );
   await client.query("COMMIT");

@@ -94,6 +94,7 @@ function CategoryCard({ category, products }: { category: string; products: Prod
 function CategoryDialog({ category, products }: { category: string; products: Product[] }) {
   const { settings } = useStorefront();
   const showsSampleNotice = products.some(product => product.isSample) && settings.illustrationNotice.trim();
+  const orderedProducts = [...products].sort((a, b) => Number(b.availability === "available") - Number(a.availability === "available"));
   return (
     <DialogContent className="flex max-h-[calc(100dvh-1.5rem)] w-[calc(100%-1.5rem)] max-w-4xl grid-rows-none flex-col gap-0 overflow-hidden rounded-2xl p-0 sm:max-h-[calc(100dvh-3rem)]">
       <DialogHeader className="shrink-0 border-b border-secondary/20 px-5 py-5 pr-14 text-left sm:px-7">
@@ -104,7 +105,7 @@ function CategoryDialog({ category, products }: { category: string; products: Pr
         {showsSampleNotice && <p className="text-xs font-bold leading-relaxed text-foreground/60">{settings.illustrationNotice}</p>}
       </DialogHeader>
       <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-5 sm:px-7">
-        <div className="space-y-5">{products.map(product => <ProductOption key={product.id} product={product} />)}</div>
+        <div className="space-y-5">{orderedProducts.map(product => <ProductOption key={product.id} product={product} />)}</div>
       </div>
       <DialogFooter className="shrink-0 border-t border-secondary/20 bg-background px-4 py-3 sm:px-7">
         <DialogClose asChild><Button variant="outline" className="w-full rounded-full font-bold sm:w-auto">{en.products.continueBrowsing}</Button></DialogClose>
